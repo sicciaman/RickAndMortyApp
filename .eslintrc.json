@@ -30,7 +30,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "an",
+            "prefix": "as",
             "style": "kebab-case"
           }
         ],

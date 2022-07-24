@@ -1,10 +1,35 @@
-<h2>Characters List</h2>
-<ng-container *ngFor="let character of characters">
-    <ul>
-        <li>{{ character.name }}</li>
-    </ul>
-</ng-container>
-<div>
-    <button [disabled]="!pagination.prev" (click)="changePage('prev')">Back</button>
-    <button [disabled]="!pagination.next" (click)="changePage('next')">Next</button>
+<div class="page-layout">
+    <div *ngIf="favorites.size" class="favorites-section">
+        <h2>Favorites</h2>
+        <div class="characters-container">
+            <div *ngFor="let favoriteId of favorites">
+                <as-character-card
+                        [character]="favoriteId | findCharacterById:characters"
+                        [isFavorite]="true"
+                        (favoriteChanged)="toggleFavorite($event)">
+                </as-character-card>
+            </div>
+        </div>
+    </div>
+
+    <div class="characters-section">
+        <h2>Characters List</h2>
+        <input type="text" placeholder="Search by name..." [formControl]="characterInput" autofocus/>
+        <div class="characters-container">
+            <div *ngFor="let character of characters">
+                <as-character-card
+                        [character]="character"
+                        (favoriteChanged)="toggleFavorite($event)">
+                </as-character-card>
+            </div>
+        </div>
+    </div>
+
+    <div class="paginator">
+        <button [disabled]="!pagination.prev" (click)="changePage('prev')">Back</button>
+        <p>Page: {{ this.pagination.page }}</p>
+        <p>Total items: {{ this.pagination.count * this.pagination.pages }}</p>
+        <button [disabled]="!pagination.next" (click)="changePage('next')">Next</button>
+    </div>
+
 </div>

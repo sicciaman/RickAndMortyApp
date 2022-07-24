@@ -18,9 +18,12 @@ export class CharactersService {
   /**
    * Retrieve all Rick&Morty characters as a paginated resource
    */
-  findAll(pagination: Pagination): Observable<CharactersResponse> {
-    const params = new HttpParams()
+  findAll(pagination: Pagination, query?: string): Observable<CharactersResponse> {
+    let params = new HttpParams()
         .append('page', pagination.page);
+    if (query) {
+      params = params.append('name', query);
+    }
     return this.http.get<CharactersResponse>(this.charactersApiUrl, {params});
   }
 }

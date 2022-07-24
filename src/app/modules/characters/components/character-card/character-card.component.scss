@@ -1,0 +1,59 @@
+@import 'src/styles';
+
+.character-card {
+  border-radius: 1em;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 18em;
+  position: relative;
+
+  .favorite-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+
+  .favorite-button:hover {
+    background-color: $accent;
+  }
+
+  .info-section {
+    border-bottom: 1px solid $light-gray;
+    border-left: 1px solid $light-gray;
+    border-right: 1px solid $light-gray;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > * {
+      margin: .5em;
+    }
+
+    .name {
+      color: $primary;
+      overflow: hidden;
+
+      > h3 {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .status {
+      background-color: $accent;
+      color: white;
+      padding: 0 1em;
+      border-radius: 1em;
+      font-weight: bold;
+    }
+  }
+}

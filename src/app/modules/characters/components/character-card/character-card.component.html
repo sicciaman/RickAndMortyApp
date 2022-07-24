@@ -1,0 +1,17 @@
+<div *ngIf="character" class="character-card">
+    <div>
+        <img [src]="character.image" loading="lazy"/>
+        <button class="favorite-button"
+                (click)="toggleFavorite(character.id, isFavorite ? 'REMOVE' : 'ADD')">
+            {{ isFavorite ? '❌' : '❤' }}
+        </button>
+    </div>
+    <div class="info-section">
+        <div class="name">
+            <h3>{{ character.name }}</h3>
+        </div>
+        <div class="status">
+            {{ character.status | uppercase }}
+        </div>
+    </div>
+</div>

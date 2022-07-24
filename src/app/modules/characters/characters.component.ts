@@ -1,10 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {debounceTime, tap} from 'rxjs';
-import {CharactersService} from './characters.service';
+import {CharactersService} from './services/characters.service';
 import {Character} from './interfaces/character.interface';
 import {Pagination} from '../../models/pagination';
 import {FavoriteAction} from './components/character-card/character-card.component';
+import {
+    CharacterDetailsDialogComponent
+} from './components/character-details-dialog/character-details-dialog.component';
+import {Dialog} from '@angular/cdk/dialog';
 
 @Component({
     selector: 'as-characters',
@@ -27,7 +31,8 @@ export class CharactersComponent implements OnInit {
     // Pagination info
     pagination: Pagination;
 
-    constructor(private charactersService: CharactersService) {
+    constructor(private charactersService: CharactersService,
+                private dialog: Dialog) {
         this.characterInput = new FormControl<string>('');
         this.query = '';
         this.characters = [];
@@ -55,9 +60,17 @@ export class CharactersComponent implements OnInit {
      * Load characters list and pagination info
      */
     fetchCharacters(): void {
-        this.charactersService.findAll(this.pagination, this.query).subscribe((data) => {
-            this.characters = data.results;
-            this.pagination = {page: this.pagination.page, ...data.info};
+        this.charactersService.findAll(this.pagination, this.query).subscribe({
+            next: (data) => {
+                this.characters = data.results;
+                this.pagination = {page: this.pagination.page, ...data.info};
+            },
+            error: (err) => {
+                if (err.status === 404) {
+                    this.characters = [];
+                    this.pagination = new Pagination();
+                }
+            }
         });
     }
 
@@ -89,5 +102,9 @@ export class CharactersComponent implements OnInit {
             this.favorites.delete(id);
             console.log(`Character with ID ${id} removed from favorites`);
         }
+    }
+
+    openCharacterDetails(character: Character): void {
+        this.dialog.open(CharacterDetailsDialogComponent, {data: {character}, panelClass: 'character-dialog'});
     }
 }

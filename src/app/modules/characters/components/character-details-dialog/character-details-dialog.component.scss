@@ -1,0 +1,90 @@
+@import 'src/styles';
+
+.character-card {
+  border-radius: 1em;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 18em;
+
+
+  .body {
+    background-color: white;
+    padding: 1em;
+
+    .info-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      > * {
+        margin: .5em;
+      }
+
+      .name {
+        color: $primary;
+        overflow: hidden;
+
+        > h3 {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+
+      .status {
+        background-color: $accent;
+        color: white;
+        padding: 0 1em;
+        border-radius: 1em;
+        font-weight: bold;
+      }
+    }
+
+    .details-section {
+
+      .kv-box {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+
+        > * {
+          margin: .2em;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .key {
+          font-weight: bold;
+          color: $primary;
+        }
+      }
+    }
+
+    .episodes-section {
+
+      .episodes-list {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        overflow-y: auto;
+
+        > * {
+          margin: .2em;
+        }
+
+        .episode-chip {
+          border-radius: 1em;
+          opacity: 80%;
+          background-color: $primary;
+          color: white;
+          font-weight: 500;
+          padding: 0 .5em;
+        }
+      }
+    }
+  }
+
+}

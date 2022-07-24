@@ -1,0 +1,33 @@
+<div class="dialog">
+    <div *ngIf="character" class="character-card">
+        <div>
+            <img [src]="character.image"/>
+        </div>
+        <div class="body">
+            <div class="info-section">
+                <div class="name">
+                    <h3>{{ character.name }}</h3>
+                </div>
+                <div class="status">
+                    {{ character.status | uppercase }}
+                </div>
+            </div>
+            <div class="details-section">
+                <div *ngFor="let detail of detailsKV | keyvalue" class="kv-box">
+                    <ng-container *ngIf="detail.value">
+                        <span class="key">{{ detail.key + ':' }}</span>
+                        <span class="value">{{ detail.value }}</span>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="episodes-section" *ngIf="episodes">
+                <h4>Episodes</h4>
+                <div class="episodes-list">
+                    <div *ngFor="let ep of episodes" class="episode-chip">
+                        {{ ep }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

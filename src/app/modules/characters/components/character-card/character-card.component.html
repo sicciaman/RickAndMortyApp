@@ -1,6 +1,6 @@
 <div *ngIf="character" class="character-card">
     <div>
-        <img [src]="character.image" loading="lazy"/>
+        <img [src]="character.image"/>
         <button class="favorite-button"
                 (click)="toggleFavorite(character.id, isFavorite ? 'REMOVE' : 'ADD')">
             {{ isFavorite ? '❌' : '❤' }}

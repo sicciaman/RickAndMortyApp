@@ -1,5 +1,12 @@
+@import '~@angular/cdk/overlay-prebuilt.css';
+
 $primary: #004643;
 $accent: #f9bc60;
 $warn: #e16162;
 
 $light-gray: #ccc;
+
+.character-dialog {
+  height: 80vh;
+  overflow-y: auto;
+}

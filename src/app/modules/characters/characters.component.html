@@ -15,11 +15,12 @@
     <div class="characters-section">
         <h2>Characters List</h2>
         <input type="text" placeholder="Search by name..." [formControl]="characterInput" autofocus/>
-        <div class="characters-container">
-            <div *ngFor="let character of characters">
+        <div class="characters-container" *ngIf="characters.length; else notFound">
+            <div *ngFor="let character of characters" class="character-wrapper">
                 <as-character-card
                         [character]="character"
-                        (favoriteChanged)="toggleFavorite($event)">
+                        (favoriteChanged)="toggleFavorite($event)"
+                        (click)="openCharacterDetails(character)">
                 </as-character-card>
             </div>
         </div>
@@ -28,8 +29,12 @@
     <div class="paginator">
         <button [disabled]="!pagination.prev" (click)="changePage('prev')">Back</button>
         <p>Page: {{ this.pagination.page }}</p>
-        <p>Total items: {{ this.pagination.count * this.pagination.pages }}</p>
+        <p>Total items: {{ this.pagination.count }}</p>
         <button [disabled]="!pagination.next" (click)="changePage('next')">Next</button>
     </div>
 
 </div>
+
+<ng-template #notFound>
+    <p>Your research produced no results</p>
+</ng-template>

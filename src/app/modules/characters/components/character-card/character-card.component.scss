@@ -1,6 +1,7 @@
 @import 'src/styles';
 
 .character-card {
+  cursor: pointer;
   border-radius: 1em;
   overflow: hidden;
   display: flex;
